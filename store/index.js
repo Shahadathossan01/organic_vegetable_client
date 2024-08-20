@@ -44,8 +44,29 @@ const productModel={
         actions.addData(data)
     })
 }
+const cartModel={
+    allCartData:null,
+    data:null,
+    addData:action((state,payload)=>{
+        state.data=payload
+    }),
+    addToCart:thunk(async(actions,payload)=>{
+        const {productId,userId}=payload
+        console.log(payload)
+        const {data}=await axios.post(`http://localhost:3000/addToCart/${productId}/${userId}`)
+        actions.addData(data)
+    }),
+    addAllCartData:action((state,payload)=>{
+        state.allCartData=payload
+    }),
+    getCartData:thunk(async(actions)=>{
+        const {data}=await axios.get('http://localhost:3000/cart')
+        actions.addAllCartData(data)
+    })
+}
 const store=createStore({
     user:userModel,
-    product:productModel
+    product:productModel,
+    cart:cartModel
 })
 export default store;

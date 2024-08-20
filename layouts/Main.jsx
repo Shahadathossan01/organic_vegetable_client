@@ -8,7 +8,7 @@ const Main = () => {
             <div>
                 <Navbar></Navbar>
             </div>
-            <div>
+            <div style={{marginTop:'80px'}}>
                 <Outlet></Outlet>
             </div>
         </>

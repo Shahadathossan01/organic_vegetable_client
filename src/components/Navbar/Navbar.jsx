@@ -20,10 +20,21 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 const Navbar=()=>{
   const {data}=useStoreState(state=>state.user)
   const {logoutUser}=useStoreActions(action=>action.user)
+  const {data:cartData,allCartData}=useStoreState(state=>state.cart)
+  const {getCartData}=useStoreActions(action=>action.cart)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  React.useEffect(()=>{
+    getCartData()
+  },[cartData])
+
+  if(!allCartData){
+    return
+  }
+  console.log(allCartData)
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -77,7 +88,7 @@ const Navbar=()=>{
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={allCartData.length} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -143,7 +154,7 @@ const Navbar=()=>{
 
             <Link to="/addToCart">
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={allCartData?.length} color="error">
                 <ShoppingCartIcon sx={{color:'white',fontSize:'30px'}} />
               </Badge>
             </IconButton>

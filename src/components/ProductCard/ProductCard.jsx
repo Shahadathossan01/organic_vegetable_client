@@ -7,12 +7,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { action, useStoreActions, useStoreState } from 'easy-peasy';
 const ProductCard=({item})=>{
-    if(!item){
+  const {data}=useStoreState(state=>state.user)
+  const {addToCart}=useStoreActions(action=>action.cart)
+    if(!item && !data){
         return
     }
-    
-    const {title,description,price,image}=item
+    const {_id:userId}=data
+    const {title,description,price,image,_id: productId}=item
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -32,7 +36,7 @@ const ProductCard=({item})=>{
         </Typography>
       </CardContent>
       <CardActions sx={{display:'flex',justifyContent:'center'}}>
-        <Button variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
+        <Button onClick={()=>addToCart({productId,userId})} variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
         <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Buy Now</Button>
         <IconButton
               size="large"

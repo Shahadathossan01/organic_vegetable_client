@@ -21,7 +21,7 @@ const Product = () => {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1 ,marginTop:'80px'}}>
+            <Box sx={{ flexGrow: 1}}>
                 <Grid container spacing={2}>
                     <Grid sx={{marginTop:'100px',display:'flex',justifyContent:'center'}} item xs={5} sm={3} md={2} >
                         <div style={{position:'fixed',backgroundColor:'#ffebee',padding:'2% 1%',textAlign:'center'}}>

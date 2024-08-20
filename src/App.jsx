@@ -4,8 +4,8 @@ import Product from "./components/Product/Product"
 import Order from "./components/Order/Order"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
-import AddToCart from "./components/AddToCart/AddToCart"
 import Favorite from "./components/Favorite/Favorite"
+import Cart from "./components/Cart/Cart"
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       {path:'order',element:<Order></Order>},
       {path:'/login',element:<Login></Login>},
       {path:'/register',element:<Register></Register>},
-      {path:'/addToCart',element:<AddToCart></AddToCart>},
+      {path:'/addToCart',element:<Cart></Cart>},
       {path:'/favorite',element:<Favorite></Favorite>}
     ]
   }
