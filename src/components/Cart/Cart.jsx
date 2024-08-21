@@ -1,19 +1,27 @@
-import { action, useStoreActions, useStoreState } from 'easy-peasy';
-import React, { useEffect } from 'react';
-import CartItem from '../CartItem/CartItem';
+import {  useStoreActions, useStoreState } from 'easy-peasy';
+import{ useEffect } from 'react';
+
 import CartTable from '../CartTable/CartTable';
 import { Button } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 const Cart = () => {
-    const {data:userData}=useStoreState(state=>state.user)
+    const {data:userData,isLoggedUser}=useStoreState(state=>state.user)
     const id=userData?._id
     const {getCartData,calculateAll,deleteAll}=useStoreActions(action=>action.cart)
     const {data,allCartData,deleteData,changeQty,cartTotalAmount,cartTotalQty}=useStoreState(state=>state.cart)
 
+    const navigate=useNavigate()
+
    useEffect(()=>{
-    getCartData(id)
-   },[getCartData,changeQty,deleteData])
+    if(isLoggedUser){
+        getCartData(id)
+    }else{
+        navigate('/login')
+    }
+   },[getCartData,changeQty,deleteData,isLoggedUser])
 
    useEffect(()=>{
     if(allCartData){
@@ -21,11 +29,6 @@ const Cart = () => {
     }
    },[allCartData,calculateAll])
     
-    // if(!allCartData || allCartData.length===0){
-    //     return <h1>There is no cart items here!!!</h1>
-    // }
-
-
     return (
         <>
         {

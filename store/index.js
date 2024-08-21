@@ -3,8 +3,10 @@ import axios from "axios"
 import { action, createStore, thunk} from "easy-peasy"
 const userModel={
     data: localStorage.getItem('userData')?JSON.parse(localStorage.getItem('userData')):null,
+    isLoggedUser:true,
     addData:action((state,payload)=>{
         state.data=payload
+        state.isLoggedUser=true
     }),
     registerUser:thunk(async(actions,payload)=>{
         const {username,email,password}=payload
@@ -31,6 +33,7 @@ const userModel={
     logoutUser:action(state=>{
         state.data=null
         localStorage.removeItem('userData')
+        state.isLoggedUser=false
     })
     
 
@@ -65,6 +68,9 @@ const cartModel={
         const {productId,userId}=payload
         const {allCartData}=getState()
         let count=true
+        if(!userId){
+            return
+        }
         allCartData?.map(item=>{
             if(item.cart._id==productId){
                 count=false
@@ -82,12 +88,7 @@ const cartModel={
         state.allCartData=payload
     }),
     getCartData:thunk(async(actions,payload)=>{
-        console.log(payload)
-        // const {data}=await axios.get('http://localhost:3000/cart')
-        // actions.addAllCartData(data)
-        // console.log(data)
         const {data}=await axios.get(`http://localhost:3000/user/${payload}`)
-        console.log(data.cart)
         actions.addAllCartData(data.cart)
     }),
     deleteCart:thunk(async(actions,payload)=>{
@@ -103,7 +104,7 @@ const cartModel={
         const {data}=await axios.patch(`http://localhost:3000/cartQtyDecrement/${payload}`)
         actions.addChangeQty(data)
     }),
-    deleteAll:thunk(async(actions,payload)=>{
+    deleteAll:thunk(async(actions)=>{
         const {data}=await axios.delete('http://localhost:3000/deleteAllCart')
         actions.addChangeQty(data)
     }),

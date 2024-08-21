@@ -8,14 +8,26 @@ import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { action, useStoreActions, useStoreState } from 'easy-peasy';
+import { useNavigate } from 'react-router-dom';
 const ProductCard=({item})=>{
   const {data}=useStoreState(state=>state.user)
   const {addToCart}=useStoreActions(action=>action.cart)
-    if(!item && !data){
+  const navigate=useNavigate()
+    if(!item){
         return
     }
     const userId=data?._id
     const {title,description,price,image,_id: productId}=item
+
+    const handleAddToCart=()=>{
+      console.log(userId)
+      if(!userId){
+        navigate('/login')
+      }else{
+        console.log('clik')
+        addToCart({productId,userId})
+      }
+    }
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -36,7 +48,7 @@ const ProductCard=({item})=>{
         </Typography>
       </CardContent>
       <CardActions sx={{display:'flex',justifyContent:'center'}}>
-        <Button onClick={()=>addToCart({productId,userId})} variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
+        <Button onClick={handleAddToCart} variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
         <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Buy Now</Button>
         <IconButton
               size="large"

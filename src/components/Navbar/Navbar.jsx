@@ -18,7 +18,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 
 const Navbar=()=>{
-  const {data}=useStoreState(state=>state.user)
+  const {data,isLoggedUser}=useStoreState(state=>state.user)
   const {logoutUser}=useStoreActions(action=>action.user)
   const {data:cartData,allCartData}=useStoreState(state=>state.cart)
   const {getCartData}=useStoreActions(action=>action.cart)
@@ -27,10 +27,14 @@ const Navbar=()=>{
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const userId=data?._id
+  
   React.useEffect(()=>{
-    getCartData(userId)
-  },[cartData])
-
+      getCartData(userId)
+  },[cartData,isLoggedUser])
+  const handleLogout=()=>{
+    logoutUser()
+    // setIslogOut(true)
+  }
   if(!allCartData){
     return
   }
@@ -86,7 +90,7 @@ const Navbar=()=>{
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={allCartData.length} color="error">
+          <Badge badgeContent={8} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -135,7 +139,7 @@ const Navbar=()=>{
               {
                 data
                 ?
-                  <Link onClick={logoutUser}>
+                  <Link onClick={handleLogout}>
                   <Button sx={{color:'white', paddingTop:'15px'}}>logout</Button>
                   </Link>
                 :
@@ -152,7 +156,7 @@ const Navbar=()=>{
 
             <Link to="/addToCart">
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={allCartData?.length} color="error">
+              <Badge badgeContent={isLoggedUser?allCartData?.length:0} color="error">
                 <ShoppingCartIcon sx={{color:'white',fontSize:'30px'}} />
               </Badge>
             </IconButton>
