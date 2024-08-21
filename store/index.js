@@ -82,9 +82,14 @@ const cartModel={
     addAllCartData:action((state,payload)=>{
         state.allCartData=payload
     }),
-    getCartData:thunk(async(actions)=>{
-        const {data}=await axios.get('http://localhost:3000/cart')
-        actions.addAllCartData(data)
+    getCartData:thunk(async(actions,payload)=>{
+        console.log(payload)
+        // const {data}=await axios.get('http://localhost:3000/cart')
+        // actions.addAllCartData(data)
+        // console.log(data)
+        const {data}=await axios.get(`http://localhost:3000/user/${payload}`)
+        console.log(data)
+        actions.addAllCartData(data.cart)
     }),
     deleteCart:thunk(async(actions,payload)=>{
         console.log(payload)
