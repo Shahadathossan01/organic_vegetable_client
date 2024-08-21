@@ -73,7 +73,6 @@ const cartModel={
         if(!count){
             const {data}=await axios.post(`http://localhost:3000/addToCart/${productId}/${userId}`)
             actions.addData(data)
-
             return
         }
         const {data}=await axios.post(`http://localhost:3000/addToCart/${productId}/${userId}`)
@@ -88,7 +87,7 @@ const cartModel={
         // actions.addAllCartData(data)
         // console.log(data)
         const {data}=await axios.get(`http://localhost:3000/user/${payload}`)
-        console.log(data)
+        console.log(data.cart)
         actions.addAllCartData(data.cart)
     }),
     deleteCart:thunk(async(actions,payload)=>{

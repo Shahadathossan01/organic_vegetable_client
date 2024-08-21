@@ -7,13 +7,13 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Link } from 'react-router-dom';
 const Cart = () => {
     const {data:userData}=useStoreState(state=>state.user)
-    const id=userData._id
+    const id=userData?._id
     const {getCartData,calculateAll,deleteAll}=useStoreActions(action=>action.cart)
     const {data,allCartData,deleteData,changeQty,cartTotalAmount,cartTotalQty}=useStoreState(state=>state.cart)
 
    useEffect(()=>{
     getCartData(id)
-   },[getCartData,changeQty,deleteData,data])
+   },[getCartData,changeQty,deleteData])
 
    useEffect(()=>{
     if(allCartData){

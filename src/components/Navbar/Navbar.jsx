@@ -26,15 +26,14 @@ const Navbar=()=>{
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  const userId=data?._id
   React.useEffect(()=>{
-    getCartData()
+    getCartData(userId)
   },[cartData])
 
   if(!allCartData){
     return
   }
-  console.log(data)
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
