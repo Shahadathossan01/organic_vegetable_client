@@ -14,6 +14,7 @@ function App() {
     path:'/',
     element:<Main></Main>,
     children:[
+      {path:'/',element:<Product></Product>},
       {path:'/product',element:<Product></Product>},
       {path:'order',element:<Order></Order>},
       {path:'/login',element:<Login></Login>},

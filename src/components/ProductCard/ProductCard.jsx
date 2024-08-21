@@ -14,7 +14,7 @@ const ProductCard=({item})=>{
     if(!item && !data){
         return
     }
-    const {_id:userId}=data
+    const userId=data?._id
     const {title,description,price,image,_id: productId}=item
 
   return (
@@ -43,7 +43,7 @@ const ProductCard=({item})=>{
               aria-label="show 17 new notifications"
               color="inherit"
             >
-                <FavoriteIcon sx={{color:'black',fontSize:'20px'}} />
+                <FavoriteIcon sx={{color:item?.fav==true?'red':'black',fontSize:'20px'}} />
             </IconButton>
       </CardActions>
     </Card>

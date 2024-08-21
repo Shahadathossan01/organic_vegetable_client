@@ -34,8 +34,7 @@ const Navbar=()=>{
   if(!allCartData){
     return
   }
-  console.log(allCartData)
-
+  console.log(data)
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
