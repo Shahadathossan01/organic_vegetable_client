@@ -22,6 +22,8 @@ const Navbar=()=>{
   const {logoutUser}=useStoreActions(action=>action.user)
   const {data:cartData,allCartData}=useStoreState(state=>state.cart)
   const {getCartData}=useStoreActions(action=>action.cart)
+  const {getAllFav}=useStoreActions(action=>action.fav)
+  const {createFav,allFavList}=useStoreState(state=>state.fav)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -29,15 +31,20 @@ const Navbar=()=>{
   const userId=data?._id
   
   React.useEffect(()=>{
+    getAllFav(userId)
+  },[createFav])
+
+  React.useEffect(()=>{
       getCartData(userId)
   },[cartData,isLoggedUser])
   const handleLogout=()=>{
     logoutUser()
     // setIslogOut(true)
   }
-  if(!allCartData){
+  if(!allCartData && !allFavList){
     return
   }
+  console.log(allFavList)
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -148,8 +155,6 @@ const Navbar=()=>{
                   </Link>
               }
 
-
-
             <Link to="register">
             <Button sx={{color:'white', paddingTop:'15px'}}>register</Button>
             </Link>
@@ -168,7 +173,7 @@ const Navbar=()=>{
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={5} color="error">
+              <Badge badgeContent={isLoggedUser?allFavList?.length:0} color="error">
                 <FavoriteIcon sx={{color:'red',fontSize:'30px'}} />
               </Badge>
             </IconButton>

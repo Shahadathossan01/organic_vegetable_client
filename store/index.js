@@ -130,6 +130,7 @@ const cartModel={
     
 }
 const favModel={
+    allFavList:[],
     createFav:null,
     addCreateFav:action((state,payload)=>{
         state.createFav=payload
@@ -141,8 +142,14 @@ const favModel={
     createFavList:thunk(async(actions,payload)=>{
         const {productId,userId}=payload        
         const {data}=await axios.post(`http://localhost:3000/addFav/${productId}/${userId}`)
-        console.log(data)
         actions.addCreateFav(data)
+    }),
+    addAllFavList:action((state,payload)=>[
+        state.allFavList=payload
+    ]),
+    getAllFav:thunk(async(actions,payload)=>{
+        const {data}=await axios.get(`http://localhost:3000/user/${payload}`)
+        actions.addAllFavList(data.fab_list)
     })
 }
 const store=createStore({

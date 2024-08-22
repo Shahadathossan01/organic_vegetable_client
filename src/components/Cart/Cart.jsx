@@ -12,9 +12,7 @@ const Cart = () => {
     const id=userData?._id
     const {getCartData,calculateAll,deleteAll}=useStoreActions(action=>action.cart)
     const {data,allCartData,deleteData,changeQty,cartTotalAmount,cartTotalQty}=useStoreState(state=>state.cart)
-
     const navigate=useNavigate()
-
    useEffect(()=>{
     if(isLoggedUser){
         getCartData(id)
