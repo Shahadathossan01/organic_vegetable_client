@@ -26,7 +26,11 @@ const Cart = () => {
         calculateAll(allCartData)
     }
    },[allCartData,calculateAll])
-    
+
+   if(!allCartData){
+    return
+   }
+    console.log(allCartData)
     return (
         <>
         {
@@ -42,7 +46,7 @@ const Cart = () => {
                 <div>
                     <h1>Subtotal: {cartTotalAmount}</h1>
                     <span>Taxes and shipping calculated at checkout</span><br />
-                    <Button variant='contained'>Check out</Button>
+                    <Link to="/checkout" state={allCartData}><Button variant='contained'>Check out</Button></Link>
                     <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                         <KeyboardBackspaceIcon></KeyboardBackspaceIcon>
                         <Link to="/product"><Button>Continue Shopping</Button></Link>

@@ -152,10 +152,32 @@ const favModel={
         actions.addAllFavList(data.fab_list)
     })
 }
+const orderModel={
+    createData:null,
+    addCreateData:action((state,payload)=>{
+        state.createData=payload
+    }),
+    createOrder:thunk(async(actions,payload)=>{
+        const {formData,cartData,userId}=payload
+        console.log(formData)
+        console.log(cartData);
+        console.log(userId);
+        const {data}=await axios.post(`http://localhost:3000/order/${userId}`,{
+            cartItem:cartData,
+            fullName:formData.fullName,
+            phone:formData.phone,
+            address:formData.address
+        })
+        actions.addCreateData(data)
+
+        
+    })
+}
 const store=createStore({
     user:userModel,
     product:productModel,
     cart:cartModel,
-    fav:favModel
+    fav:favModel,
+    order:orderModel
 })
 export default store;

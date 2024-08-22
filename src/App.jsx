@@ -6,6 +6,7 @@ import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import Favorite from "./components/Favorite/Favorite"
 import Cart from "./components/Cart/Cart"
+import CheckOut from "./components/CheckOut/CheckOut"
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
       {path:'/login',element:<Login></Login>},
       {path:'/register',element:<Register></Register>},
       {path:'/addToCart',element:<Cart></Cart>},
-      {path:'/favorite',element:<Favorite></Favorite>}
+      {path:'/favorite',element:<Favorite></Favorite>},
+      {path:'/checkout',element:<CheckOut></CheckOut>}
     ]
   }
  ])
