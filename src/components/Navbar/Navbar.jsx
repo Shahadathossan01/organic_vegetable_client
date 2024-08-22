@@ -32,7 +32,7 @@ const Navbar=()=>{
   
   React.useEffect(()=>{
     getAllFav(userId)
-  },[createFav])
+  },[createFav,isLoggedUser])
 
   React.useEffect(()=>{
       getCartData(userId)
@@ -44,7 +44,6 @@ const Navbar=()=>{
   if(!allCartData && !allFavList){
     return
   }
-  console.log(allFavList)
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
