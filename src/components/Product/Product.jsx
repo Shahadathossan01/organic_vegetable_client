@@ -8,9 +8,10 @@ import { Box, Button, Grid } from "@mui/material";
 const Product = () => {
     const {getProduct}=useStoreActions(action=>action.product)
     const {data}=useStoreState(state=>state.product)
+    const {createFav}=useStoreState(state=>state.fav)
     useEffect(()=>{
         getProduct()
-    },[])
+    },[createFav])
     if(!data){
         return
     }

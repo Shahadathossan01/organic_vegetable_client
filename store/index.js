@@ -129,9 +129,26 @@ const cartModel={
     })
     
 }
+const favModel={
+    createFav:null,
+    addCreateFav:action((state,payload)=>{
+        state.createFav=payload
+    }),
+    favList:[],
+    addFavList:action((state,payload)=>{
+        state.favList=payload
+    }),
+    createFavList:thunk(async(actions,payload)=>{
+        const {productId,userId}=payload        
+        const {data}=await axios.post(`http://localhost:3000/addFav/${productId}/${userId}`)
+        console.log(data)
+        actions.addCreateFav(data)
+    })
+}
 const store=createStore({
     user:userModel,
     product:productModel,
-    cart:cartModel
+    cart:cartModel,
+    fav:favModel
 })
 export default store;

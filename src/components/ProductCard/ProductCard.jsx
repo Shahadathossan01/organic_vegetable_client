@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 const ProductCard=({item})=>{
   const {data}=useStoreState(state=>state.user)
   const {addToCart}=useStoreActions(action=>action.cart)
+  const {createFavList}=useStoreActions(action=>action.fav)
+
   const navigate=useNavigate()
     if(!item){
         return
@@ -50,7 +52,9 @@ const ProductCard=({item})=>{
       <CardActions sx={{display:'flex',justifyContent:'center'}}>
         <Button onClick={handleAddToCart} variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
         <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Buy Now</Button>
+
         <IconButton
+              onClick={()=>createFavList({productId,userId})}
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
