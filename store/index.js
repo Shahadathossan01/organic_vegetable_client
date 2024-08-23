@@ -154,6 +154,7 @@ const favModel={
 }
 const orderModel={
     createData:null,
+    orderData:[],
     addCreateData:action((state,payload)=>{
         state.createData=payload
     }),
@@ -171,6 +172,29 @@ const orderModel={
         // actions.addCreateData(data)
         console.log(data)
         window.location.replace(data.url)
+    }),
+    addOrderData:action((state,payload)=>{
+        state.orderData=payload
+    }),
+    getOrder:thunk(async(actions,payload)=>{
+        const {data}=await axios.get(`http://localhost:3000/user/${payload}`)
+        actions.addOrderData(data.order_list)
+    })
+}
+const reviewModel={
+    createReviewData:null,
+    addCreateReviewData:action((state,payload)=>{
+        state.createReviewData=payload
+    }),
+    createReview:thunk(async(actions,payload)=>{
+        const {author,ratting,comments,productId}=payload
+        const {data}=await axios.post(`http://localhost:3000/review/${productId}`,{
+            author:author,
+            ratting:ratting,
+            comments:comments
+        })
+        console.log(data)
+        actions.addCreateReviewData(data)
     })
 }
 const store=createStore({
@@ -178,6 +202,7 @@ const store=createStore({
     product:productModel,
     cart:cartModel,
     fav:favModel,
-    order:orderModel
+    order:orderModel,
+    review:reviewModel
 })
 export default store;

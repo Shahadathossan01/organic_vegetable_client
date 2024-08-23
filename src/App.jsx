@@ -10,6 +10,7 @@ import CheckOut from "./components/CheckOut/CheckOut"
 import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess"
 import PaymentFail from "./components/PaymentFail/PaymentFail"
 import PaymentCancel from "./components/PaymentCancel/PaymentCancel"
+import ProductDetails from "./components/ProductDetails/ProductDetails"
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
       {path:'/checkout',element:<CheckOut></CheckOut>},
       {path:'/paymentSuccess',element:<PaymentSuccess></PaymentSuccess>},
       {path:'/paymentFail',element:<PaymentFail></PaymentFail>},
-      {path:'/paymentCalcel',element:<PaymentCancel></PaymentCancel>}
+      {path:'/paymentCalcel',element:<PaymentCancel></PaymentCancel>},
+      {path:'/productDetails',element:<ProductDetails></ProductDetails>}
     ]
   }
  ])

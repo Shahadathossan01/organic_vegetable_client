@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { action, useStoreActions, useStoreState } from 'easy-peasy';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const ProductCard=({item})=>{
   const {data}=useStoreState(state=>state.user)
   const {addToCart}=useStoreActions(action=>action.cart)
@@ -49,9 +49,11 @@ const ProductCard=({item})=>{
          {description.slice(0,100)+'.........'}
         </Typography>
       </CardContent>
-      <CardActions sx={{display:'flex',justifyContent:'center'}}>
+      <CardActions sx={{display:'flex',alignItems:'center',justifyContent:'center'}}>
         <Button onClick={handleAddToCart} variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
-        {/* <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Buy Now</Button> */}
+        <Link to="/productDetails">
+        <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Details</Button>
+        </Link>
 
         <IconButton
               onClick={()=>createFavList({productId,userId})}
