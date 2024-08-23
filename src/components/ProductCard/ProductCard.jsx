@@ -51,7 +51,7 @@ const ProductCard=({item})=>{
       </CardContent>
       <CardActions sx={{display:'flex',justifyContent:'center'}}>
         <Button onClick={handleAddToCart} variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
-        <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Buy Now</Button>
+        {/* <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Buy Now</Button> */}
 
         <IconButton
               onClick={()=>createFavList({productId,userId})}

@@ -7,6 +7,9 @@ import Register from "./components/Register/Register"
 import Favorite from "./components/Favorite/Favorite"
 import Cart from "./components/Cart/Cart"
 import CheckOut from "./components/CheckOut/CheckOut"
+import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess"
+import PaymentFail from "./components/PaymentFail/PaymentFail"
+import PaymentCancel from "./components/PaymentCancel/PaymentCancel"
 
 
 function App() {
@@ -22,7 +25,10 @@ function App() {
       {path:'/register',element:<Register></Register>},
       {path:'/addToCart',element:<Cart></Cart>},
       {path:'/favorite',element:<Favorite></Favorite>},
-      {path:'/checkout',element:<CheckOut></CheckOut>}
+      {path:'/checkout',element:<CheckOut></CheckOut>},
+      {path:'/paymentSuccess',element:<PaymentSuccess></PaymentSuccess>},
+      {path:'/paymentFail',element:<PaymentFail></PaymentFail>},
+      {path:'/paymentCalcel',element:<PaymentCancel></PaymentCancel>}
     ]
   }
  ])

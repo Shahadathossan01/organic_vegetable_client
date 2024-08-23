@@ -168,9 +168,9 @@ const orderModel={
             phone:formData.phone,
             address:formData.address
         })
-        actions.addCreateData(data)
-
-        
+        // actions.addCreateData(data)
+        console.log(data)
+        window.location.replace(data.url)
     })
 }
 const store=createStore({
