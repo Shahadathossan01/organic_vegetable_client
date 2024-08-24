@@ -10,16 +10,15 @@ import { Rating } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { action, useStoreActions, useStoreState } from 'easy-peasy';
 
-const ReviewModal=({open,handleClose,productId})=>{
+const EditReviewModal=({id,open,handleClose})=>{
   const { register, handleSubmit, setValue, watch,formState: { errors }}=useForm()
   const {data}=useStoreState(state=>state.user)
-  const {createReview}=useStoreActions(action=>action.review)
+  const {updateReview}=useStoreActions(action=>action.review)
   const ratingValue = watch('rating', 2.5);
   const onSubmit=(formData)=>{
-    const author=formData.author||data?.username
     const ratting=ratingValue ||formData.rating
     const comments=formData.comments
-    createReview({author,ratting,comments,productId})
+    updateReview({ratting,comments,id})
     handleClose()
   }
   return (
@@ -36,7 +35,7 @@ const ReviewModal=({open,handleClose,productId})=>{
           </DialogContentText>
         </DialogContent>
         <form onSubmit={handleSubmit(onSubmit)} style={{margin:'20px'}}>
-          <input {...register('author',)} placeholder={data?.username || 'author'}type="text" name="author" id="author" /><br /><br />
+          <input disabled {...register('author',)} placeholder={data?.username || 'author'}type="text" name="author" id="author" /><br /><br />
           <textarea {...register('comments',{required:true})} placeholder='comments' name="comments" id=""></textarea><br /><br />
           <Rating name="rating"
         precision={0.5}
@@ -50,4 +49,4 @@ const ReviewModal=({open,handleClose,productId})=>{
   );
 }
 
-export default ReviewModal;
+export default EditReviewModal;

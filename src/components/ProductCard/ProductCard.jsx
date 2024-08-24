@@ -13,7 +13,6 @@ const ProductCard=({item})=>{
   const {data}=useStoreState(state=>state.user)
   const {addToCart}=useStoreActions(action=>action.cart)
   const {createFavList}=useStoreActions(action=>action.fav)
-
   const navigate=useNavigate()
     if(!item){
         return
@@ -51,7 +50,7 @@ const ProductCard=({item})=>{
       </CardContent>
       <CardActions sx={{display:'flex',alignItems:'center',justifyContent:'center'}}>
         <Button onClick={handleAddToCart} variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
-        <Link to="/productDetails">
+        <Link to={`/productDetails/${productId}`}>
         <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Details</Button>
         </Link>
 

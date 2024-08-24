@@ -1,9 +1,25 @@
+import ReviewItem from "../ReviewItem/ReviewItem";
 
 
-const ProductReview = () => {
+const ProductReview = ({review}) => {
+    
     return (
         <>
-            <h1>product review</h1>
+            <h1>Product Review</h1>
+            {
+                review.length==0?(
+                    <h1 style={{textAlign:'center'}}>No Review Yet!</h1>
+                ):(
+                    <div style={{display:'flex',gap:'20px',flexWrap:'wrap'}}>
+                        {
+                        review.map(item=>(
+                            <ReviewItem key={item._id} item={item}></ReviewItem>
+                        ))
+                    }
+                    </div>
+                )
+            }
+            
         </>
     );
 };

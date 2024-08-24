@@ -30,7 +30,7 @@ function App() {
       {path:'/paymentSuccess',element:<PaymentSuccess></PaymentSuccess>},
       {path:'/paymentFail',element:<PaymentFail></PaymentFail>},
       {path:'/paymentCalcel',element:<PaymentCancel></PaymentCancel>},
-      {path:'/productDetails',element:<ProductDetails></ProductDetails>}
+      {path:'/productDetails/:productId',element:<ProductDetails></ProductDetails>}
     ]
   }
  ])

@@ -40,12 +40,20 @@ const userModel={
 }
 const productModel={
     data:null,
+    singleProduct:null,
     addData:action((state,payload)=>{
         state.data=payload
+    }),
+    addSingleProduct:action((state,payload)=>{
+        state.singleProduct=payload
     }),
     getProduct:thunk(async(actions)=>{
         const {data}=await axios.get('http://localhost:3000/product')
         actions.addData(data)
+    }),
+    getProductById:thunk(async(actions,payload)=>{
+        const {data}=await axios.get(`http://localhost:3000/product/${payload}`)
+        actions.addSingleProduct(data)
     })
 }
 const cartModel={
@@ -183,6 +191,7 @@ const orderModel={
 }
 const reviewModel={
     createReviewData:null,
+    updateReviewData:null,
     addCreateReviewData:action((state,payload)=>{
         state.createReviewData=payload
     }),
@@ -193,8 +202,18 @@ const reviewModel={
             ratting:ratting,
             comments:comments
         })
-        console.log(data)
         actions.addCreateReviewData(data)
+    }),
+    addUpdateReviewData:action((state,payload)=>{
+        state.updateReviewData=payload
+    }),
+    updateReview:thunk(async(actions,payload)=>{
+        const {ratting,comments,id}=payload
+        const {data}=await axios.patch(`http://localhost:3000/review/${id}`,{
+            ratting:ratting,
+            comments:comments
+        })
+        actions.addUpdateReviewData(data)
     })
 }
 const store=createStore({
