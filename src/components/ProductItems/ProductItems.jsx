@@ -3,8 +3,8 @@ import ProductCard from "../ProductCard/ProductCard";
 
 
 const ProductItems = ({data,title}) => {
-    if(!data){
-        return 
+    if(data.length==0){
+        return
     }
     return (
         <>

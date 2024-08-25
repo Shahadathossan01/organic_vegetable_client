@@ -30,7 +30,6 @@ const Cart = () => {
    if(!allCartData){
     return
    }
-    console.log(allCartData)
     return (
         <>
         {
