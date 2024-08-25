@@ -9,6 +9,7 @@ import { IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { action, useStoreActions, useStoreState } from 'easy-peasy';
 import { Link, useNavigate } from 'react-router-dom';
+
 const ProductCard=({item})=>{
   const {data}=useStoreState(state=>state.user)
   const {addToCart}=useStoreActions(action=>action.cart)
@@ -27,6 +28,7 @@ const ProductCard=({item})=>{
       }else{
         console.log('clik')
         addToCart({productId,userId})
+        
       }
     }
 
@@ -42,7 +44,7 @@ const ProductCard=({item})=>{
           {title}
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
-          Price: {price} Taka
+          Price: {price} Taka (per kg)
         </Typography>
         <Typography sx={{height:'60px'}} variant="body2" color="text.secondary">
          {description.slice(0,100)+'.........'}

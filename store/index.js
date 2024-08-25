@@ -1,6 +1,7 @@
 import { Addchart } from "@mui/icons-material"
 import axios from "axios"
 import { action, createStore, thunk} from "easy-peasy"
+import { toast } from "react-toastify"
 const userModel={
     data: localStorage.getItem('userData')?JSON.parse(localStorage.getItem('userData')):null,
     isLoggedUser:true,
@@ -71,6 +72,9 @@ const cartModel={
     }),
     addData:action((state,payload)=>{
         state.data=payload
+        toast.info('Add to Cart',{
+            position:'bottom-left'
+        })
     }),
     addToCart:thunk(async(actions,payload,{getState})=>{
         const {productId,userId}=payload

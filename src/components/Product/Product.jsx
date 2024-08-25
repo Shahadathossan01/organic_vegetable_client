@@ -48,7 +48,7 @@ const Product =() => {
                     <Grid item xs={6} sm={8} md={9} xl={10}>
                         <div style={{}}>
                             <ProductItems data={hotDeals} title="Hot Deals/Offers"></ ProductItems>
-                            <ProductItems data={sessional} title="Sessional"></ProductItems>
+                            <ProductItems data={sessional} title="Sessional Product"></ProductItems>
                             <ProductItems data={regular} title="Regular Product"></ProductItems>
                         </div>
                     </Grid>
