@@ -1,9 +1,16 @@
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 
 const PaymentSuccess = () => {
     return (
-        <div>
-            <h1>payment success</h1>
+        <div style={{height:'300px',display:'flex',justifyContent:'center',alignItems:'center'}}>
+            <div>
+                <h1>payment success</h1>
+                <div style={{textAlign:'center'}}>
+                    <Link to="/order"><Button size="small" color="secondary" variant="contained">Show Order</Button></Link>
+                </div>
+            </div>
         </div>
     );
 };

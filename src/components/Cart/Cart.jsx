@@ -34,7 +34,7 @@ const Cart = () => {
         <>
         {
             allCartData.length===0?(
-                <h1>There is no cart items here!!!</h1>
+                <h1 style={{height:'300px',display:'flex',justifyContent:'center',alignItems:'center',color:'gray'}}>There is no cart items here!!!</h1>
             )
             :(
                 <div >
@@ -45,7 +45,7 @@ const Cart = () => {
                 <div>
                     <h1>Subtotal: {cartTotalAmount}</h1>
                     <span>Taxes and shipping calculated at checkout</span><br />
-                    <Link to="/checkout" state={allCartData}><Button variant='contained'>Check out</Button></Link>
+                    <Link to="/checkout" state={{allCartData,cartTotalAmount}}><Button variant='contained'>Check out</Button></Link>
                     <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                         <KeyboardBackspaceIcon></KeyboardBackspaceIcon>
                         <Link to="/product"><Button>Continue Shopping</Button></Link>

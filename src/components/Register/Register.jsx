@@ -1,14 +1,20 @@
 import { Button } from "@mui/material";
 import { useStoreActions} from "easy-peasy";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = () => {
+    const navigate=useNavigate()
     const {register,handleSubmit}=useForm()
     const {registerUser}=useStoreActions(action=>action.user)
     const onSubmit=data=>{
         registerUser(data)
+        navigate('/login')
+        toast.success('successfully registered, Please Login!',{
+            position:'bottom-left'
+        })
+
     }
     return (
         <div style={{width:'50%',margin:'auto',marginTop:'80px'}}>

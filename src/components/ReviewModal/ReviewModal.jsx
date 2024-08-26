@@ -16,7 +16,7 @@ const ReviewModal=({open,handleClose,productId})=>{
   const {createReview}=useStoreActions(action=>action.review)
   const ratingValue = watch('rating', 2.5);
   const onSubmit=(formData)=>{
-    const author=formData.author||data?.username
+    const author=formData.author
     const ratting=ratingValue ||formData.rating
     const comments=formData.comments
     createReview({author,ratting,comments,productId})
@@ -36,7 +36,7 @@ const ReviewModal=({open,handleClose,productId})=>{
           </DialogContentText>
         </DialogContent>
         <form onSubmit={handleSubmit(onSubmit)} style={{margin:'20px'}}>
-          <input {...register('author',)} placeholder={data?.username || 'author'}type="text" name="author" id="author" /><br /><br />
+          <input disabled {...register('author',)} placeholder={data?.username || 'author'}type="text" name="author" id="author" /><br /><br />
           <textarea {...register('comments',{required:true})} placeholder='comments' name="comments" id=""></textarea><br /><br />
           <Rating name="rating"
         precision={0.5}

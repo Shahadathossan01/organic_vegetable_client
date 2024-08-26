@@ -32,7 +32,7 @@ const ReviewItem=({item})=>{
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button onClick={handleClickOpen}  size="small" color="primary">
+        <Button variant='contained' onClick={handleClickOpen}  size="small" color="success">
           Edit
         </Button>
         <EditReviewModal id={_id} open={open} handleClose={handleClose}></EditReviewModal>

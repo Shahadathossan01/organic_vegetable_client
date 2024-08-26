@@ -22,16 +22,12 @@ const ProductCard=({item})=>{
     const {title,description,price,image,_id: productId}=item
 
     const handleAddToCart=()=>{
-      console.log(userId)
       if(!userId){
         navigate('/login')
       }else{
-        console.log('clik')
         addToCart({productId,userId})
-        
       }
     }
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia

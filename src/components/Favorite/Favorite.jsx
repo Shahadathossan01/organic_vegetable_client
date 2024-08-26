@@ -19,7 +19,7 @@ const Favorite = () => {
             <h1 style={{textAlign:'center'}}>Your Favorite Products</h1><hr />
             {
                 allFavList.length==0?(
-                    <h1>There is no favorite product right now!!!</h1>
+                    <h1 style={{height:'300px',display:'flex',justifyContent:'center',alignItems:'center',color:'gray'}}>There is no favorite product right now!!!</h1>
                 ):(
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>

@@ -16,10 +16,6 @@ const userModel={
             email:email,
             password:password
         })
-
-        // localStorage.removeItem('userData')
-        // actions.addData(data.user)
-        // localStorage.setItem('userData',JSON.stringify(data.user))
     }),
     loginUser:thunk(async(actions,payload)=>{
         const {email,password}=payload;
@@ -104,17 +100,26 @@ const cartModel={
         actions.addAllCartData(data.cart)
     }),
     deleteCart:thunk(async(actions,payload)=>{
-        console.log(payload)
         const {data}=await axios.delete(`http://localhost:3000/cart/${payload}`)
         actions.addDeleteData(data)
+        toast.error('Deleted Cart Item',{
+            position:'bottom-left'
+        })
     }),
     increment:thunk(async(actions,payload)=>{
         const {data}=await axios.patch(`http://localhost:3000/cartQtyIncrement/${payload}`)
         actions.addChangeQty(data)
+        toast.success('Increment Cart Quantity',{
+            position:'bottom-left'
+        })
     }),
     decrement:thunk(async(actions,payload)=>{
+        console.log('click')
         const {data}=await axios.patch(`http://localhost:3000/cartQtyDecrement/${payload}`)
         actions.addChangeQty(data)
+        toast.success('Decrement Cart Quantity',{
+            position:'bottom-left'
+        })
     }),
     deleteAll:thunk(async(actions)=>{
         const {data}=await axios.delete('http://localhost:3000/deleteAllCart')
@@ -146,10 +151,14 @@ const favModel={
     createFav:null,
     addCreateFav:action((state,payload)=>{
         state.createFav=payload
+        toast.success('change favorite',{
+            position:'bottom-right'
+        })
     }),
     favList:[],
     addFavList:action((state,payload)=>{
         state.favList=payload
+        
     }),
     createFavList:thunk(async(actions,payload)=>{
         const {productId,userId}=payload        
@@ -167,22 +176,18 @@ const favModel={
 const orderModel={
     createData:null,
     orderData:[],
+    deleteData:null,
     addCreateData:action((state,payload)=>{
         state.createData=payload
     }),
     createOrder:thunk(async(actions,payload)=>{
-        const {formData,cartData,userId}=payload
-        console.log(formData)
-        console.log(cartData);
-        console.log(userId);
+        const {formData,allCartData,userId}=payload
         const {data}=await axios.post(`http://localhost:3000/order/${userId}`,{
-            cartItem:cartData,
+            cartItem:allCartData,
             fullName:formData.fullName,
             phone:formData.phone,
             address:formData.address
         })
-        // actions.addCreateData(data)
-        console.log(data)
         window.location.replace(data.url)
     }),
     addOrderData:action((state,payload)=>{
@@ -191,6 +196,16 @@ const orderModel={
     getOrder:thunk(async(actions,payload)=>{
         const {data}=await axios.get(`http://localhost:3000/user/${payload}`)
         actions.addOrderData(data.order_list)
+    }),
+    addDeleteData:action((state,payload)=>{
+        state.deleteData=payload
+        toast.success('successfully deleted',{
+            position:'bottom-left'
+        })
+    }),
+    deleteOrder:thunk(async(actions,payload)=>{
+        const {data}=await axios.delete(`http://localhost:3000/order/${payload}`)
+        actions.addDeleteData(data)
     })
 }
 const reviewModel={
@@ -198,6 +213,9 @@ const reviewModel={
     updateReviewData:null,
     addCreateReviewData:action((state,payload)=>{
         state.createReviewData=payload
+        toast.success('successfully created review',{
+            position:'bottom-left'
+        })
     }),
     createReview:thunk(async(actions,payload)=>{
         const {author,ratting,comments,productId}=payload
@@ -210,6 +228,7 @@ const reviewModel={
     }),
     addUpdateReviewData:action((state,payload)=>{
         state.updateReviewData=payload
+        toast.success('successfully updated')
     }),
     updateReview:thunk(async(actions,payload)=>{
         const {ratting,comments,id}=payload

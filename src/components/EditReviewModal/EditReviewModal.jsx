@@ -28,12 +28,6 @@ const EditReviewModal=({id,open,handleClose})=>{
         onClose={handleClose}
       >
         <DialogTitle>Please Review</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText>
-        </DialogContent>
         <form onSubmit={handleSubmit(onSubmit)} style={{margin:'20px'}}>
           <input disabled {...register('author',)} placeholder={data?.username || 'author'}type="text" name="author" id="author" /><br /><br />
           <textarea {...register('comments',{required:true})} placeholder='comments' name="comments" id=""></textarea><br /><br />
@@ -41,7 +35,7 @@ const EditReviewModal=({id,open,handleClose})=>{
         precision={0.5}
         value={ratingValue}
         onChange={(_, value) => setValue('rating', value)} /><br /><br />
-          <Button size='small' sx={{marginLeft:'20px',marginRight:'20px'}} variant='contained' type='submit'>submit</Button>
+          <Button size='small' sx={{marginLeft:'20px',marginRight:'20px'}} variant='contained' type='submit'>Edit</Button>
           <Button size='small' variant='contained' onClick={handleClose}>Cancel</Button>
         </form>
       </Dialog>

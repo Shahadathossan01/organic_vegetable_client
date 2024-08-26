@@ -22,13 +22,15 @@ const ProductDetails = () => {
             <h1>Product Details</h1>
             <Box sx={{ flexGrow: 1 ,padding:'0px 20px'}}>
                 <Grid container spacing={2}>
-                    <Grid style={{display:'flex',alignItems:'center'}} item xs={12} sm={6} md={6}>
+                    <Grid style={{display:'flex',alignItems:'center',justifyContent:'center'}} item xs={12} sm={6} md={6}>
                         <img style={{width:'80%'}} src={image} alt="" />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={6}>
-                        <h1>{title}</h1>
-                        <h1>Price: {price}</h1>
-                        <h1>{description}</h1>
+                    <Grid sx={{display:'flex',justifyContent:'center'}} item xs={12} sm={6} md={6}>
+                        <div>
+                        <h2>{title}</h2>
+                        <h2>Price: {price}</h2>
+                        <p>{description}</p>
+                        </div>
                     </Grid>
                 </Grid>
             </Box>

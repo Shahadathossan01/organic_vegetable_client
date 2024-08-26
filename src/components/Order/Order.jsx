@@ -5,16 +5,17 @@ import OrderList from "../OrderList/OrderList";
 
 const Order = () => {
     const {data}=useStoreState(state=>state.user)
-    const {orderData}=useStoreState(state=>state.order)
+    const {orderData,deleteData}=useStoreState(state=>state.order)
     const {getOrder}=useStoreActions(action=>action.order)
     const userId=data?._id
     useEffect(()=>{
         if(data){
             getOrder(userId)
         }
-    },[])
-    if(!orderData){
-        return
+    },[deleteData])
+    console.log(orderData)
+    if(orderData.length==0){
+        return <h1 style={{height:'300px',display:'flex',alignItems:'center',justifyContent:'center',color:'gray'}}>There is no order YET!</h1>
     }
     
     return (
