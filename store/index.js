@@ -1,6 +1,7 @@
 import { Addchart } from "@mui/icons-material"
 import axios from "axios"
 import { action, createStore, thunk} from "easy-peasy"
+import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 const userModel={
     data: localStorage.getItem('userData')?JSON.parse(localStorage.getItem('userData')):null,
@@ -26,6 +27,10 @@ const userModel={
         localStorage.removeItem('userData')
         actions.addData(data.payload)
         localStorage.setItem('userData',JSON.stringify(data.payload))
+        toast.success('successfully login.',{
+            position:'bottom-left'
+        })
+        return
     }),
     logoutUser:action(state=>{
         state.data=null

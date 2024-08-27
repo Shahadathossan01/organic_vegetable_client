@@ -11,6 +11,7 @@ import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess"
 import PaymentFail from "./components/PaymentFail/PaymentFail"
 import PaymentCancel from "./components/PaymentCancel/PaymentCancel"
 import ProductDetails from "./components/ProductDetails/ProductDetails"
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute"
 
 
 function App() {
@@ -21,11 +22,11 @@ function App() {
     children:[
       {path:'/',element:<Product></Product>},
       {path:'/product',element:<Product></Product>},
-      {path:'order',element:<Order></Order>},
+      {path:'order',element:<PrivateRoute><Order></Order></PrivateRoute>},
       {path:'/login',element:<Login></Login>},
       {path:'/register',element:<Register></Register>},
-      {path:'/addToCart',element:<Cart></Cart>},
-      {path:'/favorite',element:<Favorite></Favorite>},
+      {path:'/addToCart',element:<PrivateRoute><Cart></Cart></PrivateRoute>},
+      {path:'/favorite',element:<PrivateRoute><Favorite></Favorite></PrivateRoute>},
       {path:'/checkout',element:<CheckOut></CheckOut>},
       {path:'/paymentSuccess',element:<PaymentSuccess></PaymentSuccess>},
       {path:'/paymentFail',element:<PaymentFail></PaymentFail>},

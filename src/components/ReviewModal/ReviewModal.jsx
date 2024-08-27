@@ -15,8 +15,9 @@ const ReviewModal=({open,handleClose,productId})=>{
   const {data}=useStoreState(state=>state.user)
   const {createReview}=useStoreActions(action=>action.review)
   const ratingValue = watch('rating', 2.5);
+  console.log(data)
   const onSubmit=(formData)=>{
-    const author=formData.author
+    const author=data?.username
     const ratting=ratingValue ||formData.rating
     const comments=formData.comments
     createReview({author,ratting,comments,productId})

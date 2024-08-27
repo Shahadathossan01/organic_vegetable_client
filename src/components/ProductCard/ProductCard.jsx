@@ -8,9 +8,11 @@ import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { action, useStoreActions, useStoreState } from 'easy-peasy';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ProductCard=({item})=>{
+  const location=useLocation()
   const {data}=useStoreState(state=>state.user)
   const {addToCart}=useStoreActions(action=>action.cart)
   const {createFavList}=useStoreActions(action=>action.fav)
@@ -22,11 +24,18 @@ const ProductCard=({item})=>{
     const {title,description,price,image,_id: productId}=item
 
     const handleAddToCart=()=>{
-      if(!userId){
-        navigate('/login')
-      }else{
-        addToCart({productId,userId})
+      if(!data || !data._id){
+        navigate('/login', { state: { from: location }, replace: true })
+        return
       }
+      addToCart({productId,userId})
+    }
+    const handleFav=()=>{
+      if(!data || !data._id){
+        navigate('/login', { state: { from: location }, replace: true })
+        return
+      }
+      createFavList({productId,userId})
     }
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -39,9 +48,17 @@ const ProductCard=({item})=>{
         <Typography gutterBottom variant="h5" component="div">
           {title}
         </Typography>
+        {
+          item.title=='banana'?(
+        <Typography gutterBottom variant="h5" component="div">
+          Price: {price} Taka (per 4 pice )
+        </Typography>
+          ):(
         <Typography gutterBottom variant="h5" component="div">
           Price: {price} Taka (per kg)
         </Typography>
+          )
+        }
         <Typography sx={{height:'60px'}} variant="body2" color="text.secondary">
          {description.slice(0,100)+'.........'}
         </Typography>
@@ -53,12 +70,12 @@ const ProductCard=({item})=>{
         </Link>
 
         <IconButton
-              onClick={()=>createFavList({productId,userId})}
+              onClick={handleFav}
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
             >
-                <FavoriteIcon sx={{color:item?.fav==true?'red':'black',fontSize:'20px'}} />
+                <FavoriteIcon sx={{color:(item?.fav==true)&&(data)?'red':'black',fontSize:'20px'}} />
             </IconButton>
       </CardActions>
     </Card>

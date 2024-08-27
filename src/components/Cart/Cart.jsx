@@ -16,9 +16,11 @@ const Cart = () => {
    useEffect(()=>{
     if(isLoggedUser){
         getCartData(id)
-    }else{
-        navigate('/login')
     }
+    
+    // else{
+    //     navigate('/login')
+    // }
    },[getCartData,changeQty,deleteData,isLoggedUser])
 
    useEffect(()=>{
