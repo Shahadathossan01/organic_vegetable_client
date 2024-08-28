@@ -3,18 +3,15 @@ import { useEffect, useState } from "react";
 
 import ProductItems from "../ProductItems/ProductItems";
 import { Box, Button, Grid } from "@mui/material";
-
-import shadows from "@mui/material/styles/shadows";
 import { category, filterByCategory } from "../../../utils";
 const Product =() => {
     const {getProduct}=useStoreActions(action=>action.product)
     const {data}=useStoreState(state=>state.product)
     const {createFav}=useStoreState(state=>state.fav)
-    const [filterData,setFilterData]=useState(data)
     const [categoryItem,setCategoryItem]=useState('all')
     useEffect(()=>{
         getProduct()
-    },[createFav])
+    },[createFav,getProduct])
     if(!data){
         return
     }

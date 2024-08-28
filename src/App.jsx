@@ -13,7 +13,6 @@ import PaymentCancel from "./components/PaymentCancel/PaymentCancel"
 import ProductDetails from "./components/ProductDetails/ProductDetails"
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute"
 
-
 function App() {
  const router=createBrowserRouter([
   {

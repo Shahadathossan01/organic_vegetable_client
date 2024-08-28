@@ -1,6 +1,5 @@
 import ReviewItem from "../ReviewItem/ReviewItem";
 
-
 const ProductReview = ({review}) => {
     
     return (
@@ -19,7 +18,6 @@ const ProductReview = ({review}) => {
                     </div>
                 )
             }
-            
         </>
     );
 };

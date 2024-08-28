@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -7,9 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { action, useStoreActions, useStoreState } from 'easy-peasy';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Link,useLocation, useNavigate } from 'react-router-dom';
 
 const ProductCard=({item})=>{
   const location=useLocation()
@@ -17,26 +15,26 @@ const ProductCard=({item})=>{
   const {addToCart}=useStoreActions(action=>action.cart)
   const {createFavList}=useStoreActions(action=>action.fav)
   const navigate=useNavigate()
-    if(!item){
-        return
-    }
-    const userId=data?._id
-    const {title,description,price,image,_id: productId}=item
+   
+  const userId=data?._id
+  const {title,description,price,image,_id: productId}=item
 
-    const handleAddToCart=()=>{
+  const handleAddToCart=()=>{
       if(!data || !data._id){
         navigate('/login', { state: { from: location }, replace: true })
         return
       }
       addToCart({productId,userId})
     }
-    const handleFav=()=>{
+
+  const handleFav=()=>{
       if(!data || !data._id){
         navigate('/login', { state: { from: location }, replace: true })
         return
       }
       createFavList({productId,userId})
     }
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -48,8 +46,9 @@ const ProductCard=({item})=>{
         <Typography gutterBottom variant="h5" component="div">
           {title}
         </Typography>
+
         {
-          item.title=='banana'?(
+          item?.title=='banana'?(
         <Typography gutterBottom variant="h5" component="div">
           Price: {price} Taka (per 4 pice )
         </Typography>
@@ -59,16 +58,17 @@ const ProductCard=({item})=>{
         </Typography>
           )
         }
+
         <Typography sx={{height:'60px'}} variant="body2" color="text.secondary">
          {description.slice(0,100)+'.........'}
         </Typography>
       </CardContent>
+
       <CardActions sx={{display:'flex',alignItems:'center',justifyContent:'center'}}>
         <Button onClick={handleAddToCart} variant='contained' sx={{bgcolor:'#ff9800'}} size="small">Add To Card</Button>
         <Link to={`/productDetails/${productId}`}>
         <Button variant='contained' sx={{bgcolor:'#009688'}} size="small">Details</Button>
         </Link>
-
         <IconButton
               onClick={handleFav}
               size="large"

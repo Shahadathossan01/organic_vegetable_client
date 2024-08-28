@@ -2,9 +2,10 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import ReviewModal from "../ReviewModal/ReviewModal";
 
-
 const OrderProductList = ({item}) => {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const {image,title,price}=item.cart
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -12,10 +13,7 @@ const OrderProductList = ({item}) => {
   const handleClose = () => {
     setOpen(false);
   };
-  if(!item){
-    return
-  }
-    const {image,title,price}=item?.cart
+
     return (
         <>
             <div style={{display:'flex',justifyContent:'space-between',gap:'10px',alignItems:'center',backgroundColor:'white',color:'black',padding:'0px 20px',marginBottom:'5px'}}>

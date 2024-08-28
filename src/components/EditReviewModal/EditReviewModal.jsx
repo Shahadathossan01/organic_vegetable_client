@@ -1,20 +1,17 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Rating } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { action, useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Fragment } from 'react';
 
 const EditReviewModal=({id,open,handleClose})=>{
   const { register, handleSubmit, setValue, watch,formState: { errors }}=useForm()
   const {data}=useStoreState(state=>state.user)
   const {updateReview}=useStoreActions(action=>action.review)
   const ratingValue = watch('rating', 2.5);
+  
   const onSubmit=(formData)=>{
     const ratting=ratingValue ||formData.rating
     const comments=formData.comments
@@ -22,7 +19,7 @@ const EditReviewModal=({id,open,handleClose})=>{
     handleClose()
   }
   return (
-    <React.Fragment>
+    <Fragment>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -39,7 +36,7 @@ const EditReviewModal=({id,open,handleClose})=>{
           <Button size='small' variant='contained' onClick={handleClose}>Cancel</Button>
         </form>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   );
 }
 

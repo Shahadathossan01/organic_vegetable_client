@@ -1,26 +1,24 @@
-
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Rating } from '@mui/material';
-import { action, useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreState } from 'easy-peasy';
 import EditReviewModal from '../EditReviewModal/EditReviewModal';
 import { useState } from 'react';
 
 const ReviewItem=({item})=>{
   const {data}=useStoreState(state=>state.user)
-  console.log(data)
-  console.log(item)
-    const {author,comments,ratting,_id}=item
-    const [open, setOpen] = useState(false);
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+  const {author,comments,ratting,_id}=item
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
   return (
     <Card sx={{ minWidth: 345 ,maxWidth:345}}>
       <CardActionArea>
