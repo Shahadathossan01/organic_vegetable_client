@@ -7,8 +7,6 @@ import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Button, Chip } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -32,14 +30,13 @@ const Navbar=()=>{
   
   React.useEffect(()=>{
     getAllFav(userId)
-  },[createFav,isLoggedUser])
+  },[createFav,isLoggedUser,getAllFav,userId])
 
   React.useEffect(()=>{
       getCartData(userId)
-  },[cartData,isLoggedUser])
+  },[cartData,isLoggedUser,getCartData,userId])
   const handleLogout=()=>{
     logoutUser()
-    // setIslogOut(true)
   }
   if(!allCartData && !allFavList){
     return
@@ -95,24 +92,62 @@ const Navbar=()=>{
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={8} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
+        <Link to="/product">
+          <Button sx={{color:'black',paddingTop:'15px'}}>products</Button>
+        </Link>
       </MenuItem>
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
+      <Link to="/order">
+            <Button sx={{color:'black', paddingTop:'15px'}}>order</Button>
+            </Link>
+      </MenuItem>
+      <MenuItem>
+      {
+                data
+                ?
+                  <Link onClick={handleLogout}>
+                  <Button sx={{color:'black', paddingTop:'15px'}}>logout</Button>
+                  </Link>
+                :
+                  <Link to="/login">
+                  <Button sx={{color:'black',paddingTop:'15px'}}>login</Button>
+                  </Link>
+              }
+      </MenuItem>
+      <MenuItem>
+      <Link to="register">
+            <Button sx={{color:'black', paddingTop:'15px'}}>register</Button>
+            </Link>
+      </MenuItem>
+      <MenuItem>
+      <Link to="/addToCart">
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={isLoggedUser?allCartData?.length:0} color="error">
+                <ShoppingCartIcon sx={{color:'black',fontSize:'30px'}} />
+              </Badge>
+            </IconButton>
+            </Link>
+      </MenuItem>
+      <MenuItem>
+      <Link to="/favorite">
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={isLoggedUser?allFavList?.length:0} color="error">
+                <FavoriteIcon sx={{color:'red',fontSize:'30px'}} />
+              </Badge>
+            </IconButton>
+            
+            </Link>
+      </MenuItem>
+      <MenuItem>
+      {
+              data&&<div style={{display:'flex',alignItems:"center",marginLeft:'10px'}}>
+              <Chip label={data?.email} sx={{color:'black'}}/>
+              </div>
+            }
       </MenuItem>
     </Menu>
   );
@@ -122,15 +157,17 @@ const Navbar=()=>{
       <AppBar position="fixed">
         <Toolbar>
         <Box sx={{ flexGrow: 0.5 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            fontSize="30px"
-            
-          >
-            Organic Vegetables
-          </Typography>
+          <Link style={{textDecoration:'none',color:'white'}}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              fontSize="30px"
+              
+            >
+              Organic Vegetables
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 0.5 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
