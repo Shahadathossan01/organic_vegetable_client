@@ -14,7 +14,6 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-
 const Navbar=()=>{
   const {data,isLoggedUser}=useStoreState(state=>state.user)
   const {logoutUser}=useStoreActions(action=>action.user)
